@@ -1,0 +1,8 @@
+{
+    "dbConnectionArgs": {
+        "host":"localhost",
+        "user":"root",
+        "password":"COMPLETE WITH YOUR OWN PASSWORD",
+        "database":"trelloclone"
+    }
+}
