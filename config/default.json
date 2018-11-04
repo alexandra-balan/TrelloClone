@@ -6,5 +6,6 @@
         "connError": "Connection error:",
         "serverStart": "Server started on port: "
     },
-    "appPort": 3000
+    "appPort": 3000,
+    "secretKey": "theBigSecret"
 }
