@@ -1,19 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-const User = require('./models/user');
-const Team = require('./models/team');
-const UserTeam = require('./models/user-team');
-const Board = require('./models/board');
-const List = require('./models/list');
-const Card = require('./models/card');
+const bodyParser = require('body-parser');
+const UserService = require('./services/user-service');
+const config = require('config');
 
 const app = express();
 const router = express.Router();
-
 const db = mongoose.connection;
-mongoose.connect('mongodb://localhost:27017/trello-schema');
-db.on('error', console.error.bind(console, 'connection error:'));
+const dbUrl = config.get("dbConnectionArgs").dbUrl;
+const conErr = config.get("appMessages").connError;
+const appPort = config.get("appPort");
+const sererStartMessage = config.get("appMessages").serverStart;
 
-const server = app.listen(3000, () => console.log('server started'));
+app.use(bodyParser.json());
+app.use('/api', router);
+
+mongoose.connect(dbUrl);
+db.on('error', console.error.bind(console, conErr));
+
+router.post('/register', UserService.register);
+
+const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;
