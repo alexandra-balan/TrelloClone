@@ -2,6 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const User = require('./models/user');
+const Team = require('./models/team');
+const UserTeam = require('./models/user-team');
+const Board = require('./models/board');
+const List = require('./models/list');
+const Card = require('./models/card');
+
 const app = express();
 const router = express.Router();
 
