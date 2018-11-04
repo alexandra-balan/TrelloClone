@@ -12,6 +12,8 @@ const conErr = config.get("appMessages").connError;
 const appPort = config.get("appPort");
 const sererStartMessage = config.get("appMessages").serverStart;
 
+const secret = "theSecret";
+
 app.use(bodyParser.json());
 app.use('/api', router);
 
@@ -19,6 +21,7 @@ mongoose.connect(dbUrl);
 db.on('error', console.error.bind(console, conErr));
 
 router.post('/register', UserService.register);
+router.post('/login',UserService.login);
 
 const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;
