@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const UserService = require('./services/user-service');
+const TeamService = require('./services/team-service');
 const config = require('config');
 
 const app = express();
@@ -21,6 +22,10 @@ db.on('error', console.error.bind(console, conErr));
 
 router.post('/register', UserService.register);
 router.post('/login', UserService.login);
+
+router.post('/team', TeamService.createTeam);
+router.put('/team/:id?', TeamService.updateTeam);
+router.get('/team/:id?', TeamService.getTeam);
 
 const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;

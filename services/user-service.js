@@ -9,7 +9,14 @@ class UserService {
     static async register(req, res) {
         let newUser = req.body.user;
         newUser.password = bcrypt.hashSync(newUser.password, 8);
-        let oldUser = await UserDao.getUserByUserName(newUser.userName);
+        let oldUser;
+
+        try {
+            oldUser = await UserDao.getUserByUserName(newUser.userName);
+        }
+        catch(error) {
+            res.status(500).send(error.message);
+        }
 
         if(oldUser) {
             res.status(500).send("User already exists");
@@ -19,11 +26,19 @@ class UserService {
         newUser = await UserDao.addUser(newUser);
         newUser.password = undefined;
         res.status(201).send(newUser);
-    };
+    }; 
 
     static async login (req,res) {
         let username = req.body.userName;
-        let user = await UserDao.getUserByUserName(username);
+        let user;
+        
+        try {
+            user = await UserDao.getUserByUserName(username);
+        }
+        catch(error) {
+            res.status(500).send(error.message);
+        }
+
         if (!user) {
             res.status(500).send("User does not exist");
             return;
