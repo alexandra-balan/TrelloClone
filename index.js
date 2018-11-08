@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const UserService = require('./services/user-service');
 const TeamService = require('./services/team-service');
+const UserTeamService = require('./services/userTeam-service');
 const config = require('config');
 
 const app = express();
@@ -53,6 +54,9 @@ router.post('/login', UserService.login);
 router.post('/team', JWTMiddleware, TeamService.createTeam);
 router.put('/team/:id?', JWTMiddleware, TeamService.updateTeam);
 router.get('/team/:id?', JWTMiddleware, TeamService.getTeam);
+
+router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getTeamUser);
+router.post('/userTeam', JWTMiddleware, UserTeamService.getTeamUser);
 
 const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;
