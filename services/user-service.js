@@ -31,7 +31,7 @@ class UserService {
     static async login (req,res) {
         let username = req.body.userName;
         let user;
-        
+        console.log(username);
         try {
             user = await UserDao.getUserByUserName(username);
         }
@@ -52,7 +52,7 @@ class UserService {
 
         const token = jwt.sign({
             userName: username , 
-            expiresInMinutes : 1440 //24h
+            expiresInMinutes : 60 //24h
         }, secretKey);
 
         res.status(200).send({token});
