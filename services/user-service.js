@@ -7,6 +7,8 @@ const secretKey = config.get("secretKey");
 class UserService {
 
     static async register(req, res) {
+        console.log(req)
+        console.log(req.body);
         let newUser = req.body.user;
         newUser.password = bcrypt.hashSync(newUser.password, 8);
         let oldUser;

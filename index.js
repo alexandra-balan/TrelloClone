@@ -18,7 +18,7 @@ const secretKey = config.get("secretKey");
 
 
 const JWTMiddleware = (req, res, next) => {
-    
+
     let JWToken;
     let cleanToken;
 
