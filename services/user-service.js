@@ -33,7 +33,6 @@ class UserService {
     static async login (req,res) {
         let attemptingUser = req.body.user;
         let user;
-        console.log(username);
         try {
             user = await UserDao.getUserByUserName(attemptingUser.userName);
         }
