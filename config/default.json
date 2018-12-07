@@ -6,6 +6,7 @@
         "connError": "Connection error:",
         "serverStart": "Server started on port: "
     },
+    "userRoles": ["Admin", "Trell User"],
     "appPort": 3000,
     "secretKey": "theBigSecret"
 }

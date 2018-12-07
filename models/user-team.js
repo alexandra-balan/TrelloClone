@@ -16,4 +16,4 @@ userTeamSchema.index({ "userId": 1, "teamId": 1}, { "unique": true });
 
 const UserTeam = mongoose.model('UserTeam', userTeamSchema);
 
-module.exports = UserTeam
+module.exports = UserTeam;

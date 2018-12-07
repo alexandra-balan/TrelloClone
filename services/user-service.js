@@ -29,29 +29,29 @@ class UserService {
     }; 
 
     static async login (req,res) {
-        let username = req.body.userName;
+        let attemptingUser = req.body.user;
         let user;
         
         try {
-            user = await UserDao.getUserByUserName(username);
+            user = await UserDao.getUserByUserName(attemptingUser.userName);
         }
         catch(error) {
             res.status(500).send(error.message);
         }
 
         if (!user) {
-            res.status(500).send("User does not exist");
+            res.status(500).send(attemptingUser.userName);
             return;
         } 
 
-        let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+        let passwordIsValid = bcrypt.compareSync(attemptingUser.password, user.password);
         if (!passwordIsValid) {
             res.status(500).send("Wrong password");
             return;
         }
 
         const token = jwt.sign({
-            userName: username , 
+            userName: attemptingUser.userName, 
             expiresInMinutes : 1440 //24h
         }, secretKey);
 
