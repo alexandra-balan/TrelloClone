@@ -24,7 +24,6 @@ const JWTMiddleware = (req, res, next) => {
 
     try {
         JWToken = req.headers.authorization;
-        console.log(JWToken);
         cleanToken = JWToken.replace('Bearer ', '');
     } 
     catch(error)

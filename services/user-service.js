@@ -56,7 +56,9 @@ class UserService {
             expiresInMinutes : 1440 //24h
         }, secretKey);
 
-        res.status(200).send({token});
+        user.password = undefined;
+
+        res.status(200).send({token, user});
     };
 
 }
