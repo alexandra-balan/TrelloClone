@@ -54,8 +54,8 @@ router.post('/team', JWTMiddleware, TeamService.createTeam);
 router.put('/team/:id?', JWTMiddleware, TeamService.updateTeam);
 router.get('/team/:id?', JWTMiddleware, TeamService.getTeam);
 
-router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getTeamUser);
-router.post('/userTeam', JWTMiddleware, UserTeamService.getTeamUser);
+router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getUserTeam);
+router.post('/userTeam', JWTMiddleware, UserTeamService.createUserTeam);
 
 const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;

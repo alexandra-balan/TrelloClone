@@ -9,7 +9,7 @@ class UserTeamService {
         }
 
         try {
-            newUserTeam = await UserTeamDao.addTeamUser(newUserTeam);
+            newUserTeam = await UserTeamDao.addUserTeam(newUserTeam);
         } 
         catch(error) {
             res.status(500).send(error.message);
@@ -17,7 +17,7 @@ class UserTeamService {
         res.status(201).send(newUserTeam)
     }
 
-    static async getTeamUser(req, res) {
+    static async getUserTeam(req, res) {
         let userTeam;
         let {teamId} = req.params;
         let {userId} = req.params;

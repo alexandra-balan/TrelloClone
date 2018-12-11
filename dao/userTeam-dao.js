@@ -14,7 +14,7 @@ class UserTeamDao {
         return userTeam;
     }
 
-    static async addTeamUser(userTeam) {
+    static async addUserTeam(userTeam) {
         let newUserTeam = UserTeam(userTeam);
         try {
             newUserTeam = await newUserTeam.save();
