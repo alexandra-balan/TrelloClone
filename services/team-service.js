@@ -7,6 +7,7 @@ class TeamService {
         let newTeam = req.body.team;
         if(!newTeam || !newTeam.teamName) {
             res.status(500).send("New team data not found in body");
+            return;
         }
 
         try {
@@ -37,8 +38,11 @@ class TeamService {
     static async updateTeam(req, res) {
         let updateTeamId = req.params.id;
         let updateParams = req.body.updateParams;
-        console.log("HATER")
-        console.log(updateParams);
+
+        if(!updateTeamId || !updateParams) {
+            res.status(500).send("Team id or params not found in request");
+        }
+
         let updatedTeam;
         try {
             updatedTeam = await TeamDao.updateTeamProperties(updateTeamId, updateParams);
