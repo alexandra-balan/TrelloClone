@@ -53,6 +53,7 @@ router.post('/login', UserService.login);
 router.post('/team', JWTMiddleware, TeamService.createTeam);
 router.put('/team/:id?', JWTMiddleware, TeamService.updateTeam);
 router.get('/team/:id?', JWTMiddleware, TeamService.getTeam);
+router.get('/teams', JWTMiddleware, TeamService.getTeams);
 
 router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getUserTeam);
 router.post('/userTeam', JWTMiddleware, UserTeamService.createUserTeam);

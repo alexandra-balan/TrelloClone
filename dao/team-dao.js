@@ -14,6 +14,18 @@ class TeamDao {
         return team;
     }
 
+    static async getTeams() {
+        let teamList;
+        try {
+            teamList = await Team.find({});
+        }
+        catch(error) {
+            throw error;
+        }
+
+        return teamList;
+    }
+
     static async addTeam(team) {
         let newTeam = new Team(team);
         try {
@@ -26,15 +38,17 @@ class TeamDao {
         return newTeam;
     }
 
-    static async updateTeamProperties(id, properties) {
+    static async updateTeamProperties(id, newTeam) {
         let team;
         let updatePropertiesMap = {};
-        if(properties.teamName) {
-            updatePropertiesMap.teamName = properties.teamName;
+        if(newTeam.teamName) {
+            updatePropertiesMap.teamName = newTeam.teamName;
         }
-        if(properties.description) {
-            updatePropertiesMap.description = properties.description;
+        if(newTeam.description) {
+            updatePropertiesMap.description = newTeam.description;
         }
+
+        console.log(updatePropertiesMap);
 
         try {
             team = await Team.findByIdAndUpdate(id, updatePropertiesMap, {new:true});

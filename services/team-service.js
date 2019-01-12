@@ -21,7 +21,7 @@ class TeamService {
 
     static async getTeam(req, res) {
         let team;
-        let teamId = req.params.id;
+        let teamId = req.query.id;
         if(!teamId) {
             res.status(500).send("Team id not found in url");
         }
@@ -35,17 +35,28 @@ class TeamService {
         res.status(200).send(team);
     }
 
-    static async updateTeam(req, res) {
-        let updateTeamId = req.params.id;
-        let updateParams = req.body.updateParams;
+    static async getTeams(req, res) {
+        let teamList;
+        try {
+            teamList = await TeamDao.getTeams();
+        } 
+        catch(error) {
+            res.status(500).send(error.message);
+        }
+        res.status(200).send(teamList);
+    }
 
-        if(!updateTeamId || !updateParams) {
+    static async updateTeam(req, res) {
+        let updateTeamId = req.query.id;
+        let newTeam = req.body.newTeam;
+
+        if(!updateTeamId || !newTeam) {
             res.status(500).send("Team id or params not found in request");
         }
 
         let updatedTeam;
         try {
-            updatedTeam = await TeamDao.updateTeamProperties(updateTeamId, updateParams);
+            updatedTeam = await TeamDao.updateTeamProperties(updateTeamId, newTeam);
         }
         catch(error) {
             res.status(500).send(error.message);
