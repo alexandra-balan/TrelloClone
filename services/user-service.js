@@ -59,6 +59,18 @@ class UserService {
         res.status(200).send({token, user});
     };
 
+    static async getByUserName(req, res) {
+        let userName = req.query.userName;
+        try {
+            let user = await UserDao.getUserByUserName(userName);
+            res.status(200).send(user);
+        } 
+        catch (e)
+        {
+            res.status(500).send("No user found");
+        }
+    }
+
 }
 
 module.exports = UserService;

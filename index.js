@@ -49,14 +49,20 @@ db.on('error', console.error.bind(console, conErr));
 
 router.post('/register', UserService.register);
 router.post('/login', UserService.login);
+router.get('/user-name/:userName?', JWTMiddleware, UserService.getByUserName);
+
 
 router.post('/team', JWTMiddleware, TeamService.createTeam);
 router.put('/team/:id?', JWTMiddleware, TeamService.updateTeam);
 router.get('/team/:id?', JWTMiddleware, TeamService.getTeam);
 router.get('/teams', JWTMiddleware, TeamService.getTeams);
 
-router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getUserTeam);
 router.post('/userTeam', JWTMiddleware, UserTeamService.createUserTeam);
+router.get('/userTeam/:id?', JWTMiddleware, TeamService.getTeamMembers);
+//router.get('/userTeam/:teamId?/:userId?', JWTMiddleware, UserTeamService.getUserTeam);
+router.delete('/userTeam/', JWTMiddleware, UserTeamService.removeByTeamIdAndUserId)
+
+
 
 const server = app.listen(appPort, () => console.log(sererStartMessage, appPort));
 module.exports = server;

@@ -10,7 +10,6 @@ class UserDao {
         catch(error) {
             throw error;
         }
-
         return user;
     }
 

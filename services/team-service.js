@@ -1,4 +1,5 @@
 const TeamDao = require('../dao/team-dao');
+const UserTeamDao = require('../dao/userTeam-dao');
 const config = require('config');
 
 class TeamService {
@@ -63,6 +64,21 @@ class TeamService {
         }
 
         res.status(200).send(updatedTeam);
+    }
+
+    static async getTeamMembers(req, res) {
+        let usersTeamList = await UserTeamDao.getByTeamId(req.query.id);
+        let team = await TeamDao.getTeamById(req.query.id);
+
+        console.log({
+            team: team,
+            members: usersTeamList
+        })
+
+        res.status(200).send({
+            team: team,
+            members: usersTeamList
+        });
     }
 
 }

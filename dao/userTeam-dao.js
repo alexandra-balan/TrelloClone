@@ -5,7 +5,7 @@ class UserTeamDao {
     static async getUserTeamById(teamId, userId) {
         let userTeam;
         try {
-            userTeam = UserTeam.findOne({userId, teamId});
+            userTeam = await UserTeam.findOne({userId, teamId});
         }
         catch(error) {
             throw error;
@@ -24,6 +24,30 @@ class UserTeamDao {
         }
 
         return newUserTeam;
+    }
+
+    static async getByTeamId(teamId) {
+        let userTeam;
+        try {
+            userTeam = await UserTeam.find({teamId}).populate("userId");
+        }
+        catch(error) {
+            throw error;
+        }
+
+        return userTeam;
+    }
+
+    static async removeByTeamIdAndUserId(teamId, userId) {
+        try {
+            await UserTeam.deleteOne({
+                userId: userId,
+                teamId: teamId
+            });
+        }
+        catch (e) {
+            throw error;
+        }
     }
 }
 
